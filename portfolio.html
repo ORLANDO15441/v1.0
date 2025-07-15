@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strn Custome - Portfolio</title>
+  <style>
+    :root {
+      --blanc: #f9f9f9;
+      --noir: #000;
+      --dore: #d4af37;
+      --dore-clair: #f0d78c;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: var(--font-main);
+      background: var(--blanc);
+      color: var(--noir);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Barre catégories */
+    #sidebar {
+      background: #111;
+      padding: 15px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    #sidebar h2 {
+      color: #ddd;
+      font-size: 1.2rem;
+      margin-right: 15px;
+      align-self: center;
+    }
+
+    .category-btn {
+      background-color: transparent;
+      border: 1.5px solid #ccc;
+      color: #ccc;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-btn:hover,
+    .category-btn.active {
+      background-color: var(--dore);
+      color: var(--noir);
+      border-color: var(--dore);
+    }
+
+    #content {
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    h2.section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      border-bottom: 3px solid var(--dore);
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-grid img {
+  width: 100%;
+  max-width: 280px; /* ne dépasse jamais 280px */
+  height: auto;
+  margin: auto; /* centre l'image horizontalement */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    #category-images p {
+      font-style: italic;
+      color: #555;
+    }
+
+    /* Aperçu plein écran */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+
+
+footer {
+  background-color: #000;
+  color: white;
+  padding: 30px 20px 10px;
+  font-size: 0.8rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: auto;
+  gap: 20px;
+}
+
+.footer-col {
+  flex: 1 1 260px;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 8px;
+}
+
+.footer-col ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-col ul li a:hover {
+  color: var(--dore);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.75rem;
+}
+
+    @media (max-width: 768px) {
+      h2.section-title {
+        font-size: 1.7rem;
+      }
+      .category-btn {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="sidebar">
+    <h2>Catégories</h2>
+    <!-- Les boutons seront insérés ici -->
+  </div>
+
+  <main id="content">
+    <section id="last-section">
+      <h2 class="section-title">Dernières réalisations</h2>
+      <div id="last-gallery" class="gallery-grid"></div>
+    </section>
+
+    <section id="category-section">
+      <h2 class="section-title">Galerie</h2>
+      <div id="category-images" class="gallery-grid"></div>
+    </section>
+  </main>
+
+  <!-- Fenêtre modal pour aperçu -->
+  <div class="modal" id="image-modal" onclick="this.classList.remove('show')">
+    <img id="modal-img" src="" alt="Aperçu">
+  </div>
+  <footer>
+  <div class="footer-container">
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <p>Antananarivo, Madagascar</p>
+      <p>contact@strncustome.com</p>
+      <p>+261 34 12 345 67</p>
+    </div>
+    <div class="footer-col">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="devis.html">Devis</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+     <div class="footer-col">
+        <h3>Liens utiles</h3>
+        <ul>
+          <li><a href="https://facebook.com/" target="_blank">Facebook</a></li>
+          <li><a href="https://bucker.com/" target="_blank">Bucker</a></li>
+          <li><a href="https://tatouage.fr/" target="_blank">Tatouage.fr</a></li>
+        </ul>
+      </div>
+  </div>
+  <div class="footer-bottom">&copy; 2025 Strn Custome. Tous droits réservés.</div>
+</footer>
+
+  <script>
+    const lastImages = [
+      {src:"https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=400&q=80", alt:"Tatouage 1", categories:["Animaux", "Noir"]},
+      {src:"https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=400&q=80", alt:"Tatouage 2", categories:["Fleurs", "Couleur"]},
+      {src:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80", alt:"Tatouage 3", categories:["Symboles", "Noir"]},
+      {src:"https://images.unsplash.com/photo-1505232070786-59f9b3d2525a?auto=format&fit=crop&w=400&q=80", alt:"Tatouage 4", categories:["Animaux", "Couleur"]},
+      {src:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80", alt:"Tatouage 5", categories:["Fleurs", "Noir"]},
+      {src:"https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=400&q=80", alt:"Tatouage 6", categories:["Symboles", "Couleur"]},
+      {src:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80", alt:"Tatouage 7", categories:["Animaux", "Noir"]},
+      {src:"https://images.unsplash.com/photo-1500315331616-db14f1a43c11?auto=format&fit=crop&w=400&q=80", alt:"Tatouage 8", categories:["Symboles", "Couleur"]}
+    ];
+
+    const allImages = [
+      ...lastImages,
+      {src:"https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80", alt:"Tatouage 9", categories:["Tribal"]},
+      {src:"https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&w=400&q=80", alt:"Tatouage 10", categories:["Portrait"]},
+      {src:"https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?auto=format&w=400&q=80", alt:"Tatouage 11", categories:["Geometrie"]},
+      {src:"https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?auto=format&w=400&q=80", alt:"Tatouage 12", categories:["Minimaliste"]},
+      {src:"https://images.unsplash.com/photo-1519838261951-4d1d0f10febb?auto=format&w=400&q=80", alt:"Tatouage 13", categories:["Lettrage"]},
+      {src:"https://images.unsplash.com/photo-1529688530647-991cd70b9b22?auto=format&w=400&q=80", alt:"Tatouage 14", categories:["Abstrait"]}
+    ];
+
+    const allCategories = [
+      "Tous", "Animaux", "Fleurs", "Symboles", "Noir", "Couleur",
+      "Tribal", "Portrait", "Geometrie", "Minimaliste", "Lettrage", "Abstrait"
+    ];
+
+    const sidebar = document.getElementById('sidebar');
+    const lastGalleryDiv = document.getElementById('last-gallery');
+    const categoryImagesDiv = document.getElementById('category-images');
+    const lastSection = document.getElementById('last-section');
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-img');
+
+    function openModal(src, alt) {
+      modalImg.src = src;
+      modalImg.alt = alt;
+      modal.classList.add('show');
+    }
+
+    function displayLastImages() {
+      lastGalleryDiv.innerHTML = '';
+      lastImages.forEach(img => {
+        const el = document.createElement('img');
+        el.src = img.src;
+        el.alt = img.alt;
+        el.addEventListener('click', () => openModal(img.src, img.alt));
+        lastGalleryDiv.appendChild(el);
+      });
+    }
+
+    function displayAllImages() {
+      categoryImagesDiv.innerHTML = '';
+      allImages.forEach(img => {
+        const el = document.createElement('img');
+        el.src = img.src;
+        el.alt = img.alt;
+        el.addEventListener('click', () => openModal(img.src, img.alt));
+        categoryImagesDiv.appendChild(el);
+      });
+    }
+
+    function displayCategoryImages(category) {
+      categoryImagesDiv.innerHTML = '';
+      if(category === "Tous") {
+        lastSection.style.display = 'block';
+        displayAllImages();
+        return;
+      }
+      lastSection.style.display = 'none';
+      const filtered = allImages.filter(img => img.categories.includes(category));
+      if(filtered.length === 0) {
+        categoryImagesDiv.innerHTML = '<p>Aucune image trouvée pour cette catégorie.</p>';
+        return;
+      }
+      filtered.forEach(img => {
+        const el = document.createElement('img');
+        el.src = img.src;
+        el.alt = img.alt;
+        el.addEventListener('click', () => openModal(img.src, img.alt));
+        categoryImagesDiv.appendChild(el);
+      });
+    }
+
+    function createCategoryButtons() {
+      allCategories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.textContent = cat;
+        btn.classList.add('category-btn');
+        if (cat === "Tous") btn.classList.add('active');
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          displayCategoryImages(cat);
+        });
+        sidebar.appendChild(btn);
+      });
+    }
+
+    displayLastImages();
+    displayAllImages();
+    createCategoryButtons();
+  </script>
+
+</body>
+</html>

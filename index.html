@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strn Custome - Tatouage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blanc: #fff;
+      --noir: #000;
+      --dore: #d4af37;
+      --dore-clair: #f0d78c;
+      --overlay-noir: rgba(0, 0, 0, 0.6);
+      --font-main: 'Poppins', sans-serif;
+      --font-title: 'Playfair Display', serif;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: var(--font-main);
+      background: var(--blanc);
+      color: var(--noir);
+      font-size: 14px;
+    }
+    header {
+      background: var(--noir);
+      color: var(--blanc);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      color: var(--dore);
+    }
+    nav a {
+      color: var(--blanc);
+      text-decoration: none;
+      margin-left: 15px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    nav a:hover {
+      color: var(--dore);
+    }
+    .hero {
+      height: 70vh;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--blanc);
+      text-align: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--overlay-noir);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 650px;
+    }
+    .hero-content h2 {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+    }
+    .btn-devis {
+      padding: 10px 24px;
+      font-size: 1rem;
+      background: var(--dore);
+      color: var(--noir);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn-devis:hover {
+      background: var(--dore-clair);
+    }
+    .gallery-section {
+      padding: 30px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .gallery-header h3 {
+      font-size: 1.8rem;
+      color: var(--noir);
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      margin: 0;
+    }
+    .gallery-header button {
+      background-color: var(--dore);
+      border: none;
+      padding: 10px 20px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 6px;
+      color: var(--noir);
+      transition: background-color 0.3s ease;
+    }
+    .gallery-header button:hover {
+      background-color: var(--dore-clair);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery-grid img:hover {
+      transform: scale(1.04);
+    }
+    .about-section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+    }
+    .about-section h3 {
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+    }
+    .about-section p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    footer {
+      background-color: var(--noir);
+      color: white;
+      padding: 30px 20px 10px;
+      font-size: 0.8rem;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: auto;
+      gap: 20px;
+    }
+    .footer-col {
+      flex: 1 1 260px;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.75rem;
+    }
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 500px) {
+      header h1 {
+        font-size: 1.2rem;
+      }
+      nav a {
+        font-size: 0.8rem;
+      }
+      .hero-content h2 {
+        font-size: 1.6rem;
+      }
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      .gallery-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .gallery-header button {
+        align-self: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>𝖘𝖙𝖗𝖓 𝖈𝖚𝖘𝖙𝖔𝖒𝖘</h1>
+    <nav>
+      <a href="#portfolio">Portfolio</a>
+      <a href="devis.html">Devis</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Bienvenue chez Strn Custome</h2>
+      <button class="btn-devis" onclick="document.getElementById('devis').scrollIntoView({behavior:'smooth'})">Demander un devis</button>
+    </div>
+  </section>
+  <section id="portfolio" class="gallery-section">
+    <div class="gallery-header">
+      <h3>Nos réalisations</h3>
+      <button onclick="window.location.href='portfolio.html'">Voir tout</button>
+    </div>
+    <div class="gallery-grid">
+      <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=400&q=80" alt="Tatouage 1" />
+      <img src="https://images.unsplash.com/photo-1523978591478-c753949ff840?auto=format&fit=crop&w=400&q=80" alt="Tatouage 2" />
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80" alt="Tatouage 3" />
+      <img src="https://images.unsplash.com/photo-1505232070786-59f9b3d2525a?auto=format&fit=crop&w=400&q=80" alt="Tatouage 4" />
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80" alt="Tatouage 5" />
+      <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=400&q=80" alt="Tatouage 6" />
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=400&q=80" alt="Tatouage 7" />
+      <img src="https://images.unsplash.com/photo-1500315331616-db14f1a43c11?auto=format&fit=crop&w=400&q=80" alt="Tatouage 8" />
+    </div>
+  </section>
+  <section class="about-section">
+    <h3>À propos de notre équipe</h3>
+    <p>Notre équipe passionnée de tatoueurs professionnels met tout son savoir-faire pour vous offrir des créations uniques et personnalisées. Nous allions créativité, hygiène et respect pour vous garantir la meilleure expérience possible.</p>
+  </section>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p>Antananarivo, Madagascar</p>
+        <p>contact@strncustome.com</p>
+        <p>+261 34 12 345 67</p>
+      </div>
+      <div class="footer-col">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="#">Accueil</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="devis.html">Demande de devis</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Strn Custome. Tous droits réservés.</div>
+  </footer>
+</body>
+</html>

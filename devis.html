@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strn Custome - Demande de devis</title>
+  <style>
+    :root {
+      --blanc: #ffffff;
+      --noir: #000000;
+      --dore: #d4af37;
+      --gris-clair: #f8f8f8;
+      --ombre: rgba(0, 0, 0, 0.08);
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-main);
+      background: var(--gris-clair);
+      color: var(--noir);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-size: 14px;
+    }
+
+    header {
+      background-color: var(--noir);
+      color: var(--dore);
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 15px;
+    }
+
+    .form-container {
+      background-color: var(--blanc);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px var(--ombre);
+      max-width: 550px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+      color: var(--noir);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--dore);
+      box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.25);
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    input[type="submit"] {
+      background-color: var(--dore);
+      color: var(--noir);
+      font-weight: bold;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #b38f22;
+      transform: translateY(-1px);
+    }
+
+    #success-message {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+      display: none;
+    }
+
+    footer {
+      background-color: var(--noir);
+      color: white;
+      padding: 30px 15px 10px;
+      font-size: 0.75rem;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: auto;
+      gap: 20px;
+    }
+
+    .footer-col {
+      flex: 1 1 260px;
+      min-width: 180px;
+    }
+
+    .footer-col h3 {
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid white;
+      padding-bottom: 3px;
+      color: white;
+    }
+
+    .footer-col p,
+    .footer-col li,
+    .footer-col a {
+      font-size: 0.75rem;
+      color: white;
+      line-height: 1.5;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-col ul li {
+      margin: 5px 0;
+    }
+
+    .footer-col a {
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-col a:hover {
+      color: var(--dore);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 15px;
+      border-top: 1px solid white;
+      margin-top: 20px;
+      font-size: 0.7rem;
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        font-size: 13px;
+      }
+      h1 {
+        font-size: 1.3rem;
+      }
+      input[type="submit"] {
+        font-size: 0.95rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Strn Custome
+  </header>
+  <main>
+    <div class="form-container">
+      <h1>Demande de devis tatouage</h1>
+      <form id="devis-form">
+        <div class="form-group">
+          <label for="nom">Nom complet *</label>
+          <input type="text" id="nom" name="nom" required placeholder="Votre nom complet" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required placeholder="exemple@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="tel">Téléphone</label>
+          <input type="tel" id="tel" name="tel" placeholder="+261 ..." />
+        </div>
+        <div class="form-group">
+          <label for="type">Type de tatouage *</label>
+          <select id="type" name="type" required>
+            <option value="" disabled selected>-- Choisissez un type --</option>
+            <option value="animal">Animal</option>
+            <option value="portrait">Portrait</option>
+            <option value="tribal">Tribal</option>
+            <option value="lettrage">Lettrage</option>
+            <option value="abstrait">Abstrait</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="description">Description / détails *</label>
+          <textarea id="description" name="description" required placeholder="Décrivez votre tatouage souhaité..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="date">Date souhaitée</label>
+          <input type="date" id="date" name="date" />
+        </div>
+        <input type="submit" value="Envoyer la demande" />
+      </form>
+      <div id="success-message">✅ Merci pour votre demande, nous vous contacterons bientôt !</div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p>📍 Antananarivo, Madagascar</p>
+        <p>📧 contact@strncustome.com</p>
+        <p>📞 +261 34 12 345 67</p>
+      </div>
+      <div class="footer-col">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="devis.html">Demande de devis</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Liens utiles</h3>
+        <ul>
+          <li><a href="https://facebook.com/" target="_blank">Facebook</a></li>
+          <li><a href="https://bucker.com/" target="_blank">Bucker</a></li>
+          <li><a href="https://tatouage.fr/" target="_blank">Tatouage.fr</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Strn Custome. Tous droits réservés.
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('devis-form');
+    const successMsg = document.getElementById('success-message');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.style.display = 'none';
+      successMsg.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
